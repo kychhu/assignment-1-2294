@@ -93,30 +93,34 @@
 	<div>NOTE: discounts of 10% are given to orders over $250</div>
 
 	<script>
+		//Kurtis Nguyen A01325231
+		//Assignment 1
+
 		//saving button to a variable to be used in a event listener 
 		const calc_btn = document.querySelector("#calculate")
-		//give constants from other variables
+		//give constants to differentiate from other variables
 		const DISCOUNT_RATE = 0.10;
 		const TAX = 0.12;
-		//let discount = 0.10;
-		//let tax = 0.12;
 		//creating new function
 	    function calculate() {
 
-			//letting new variable for each line
+			// Creating new variable to store sub total as result
 			let sub_total = 0;
+			// Creating new variable to store for each line total until calculated
 			let line_total = 0;
-			//let discount_amount = 0;
+			//Creating variable to store for tax amount until calculated
 			let tax_amount = 0;
+			//Creating variable to store for total until calculated
 			let total = 0;
 			
 
 			//Line-1 
-			// Multiples the price to corresponding item quantity
+			// Multiples the price to corresponding item quantity by using queryselector to grab correct corresponding elements, giving linetotal a calculation to have display the result
+			//We repeat this code for every line because its the same structure to getting line totals
 			line_total = document.querySelector("#line-1-quantity").value * document.querySelector("#line-1-price").value;
-			//Displays line total 
+			//Using innerHTML to displays line total with 2 decimal places from the toFixed(2)
 			document.querySelector("#line-1").innerHTML = line_total.toFixed(2);
-			//Adds lines total to sub total
+			//Adds lines total to sub total from right to left
 			sub_total += line_total;
 
 			//line-2 
@@ -131,7 +135,6 @@
 
 			//line 4
 			line_total = document.querySelector("#line-4-quantity").value * document.querySelector("#line-4-price").value;
-
 			document.querySelector("#line-4").innerHTML = line_total.toFixed(2);
 			sub_total += line_total;	
 
@@ -141,28 +144,36 @@
 			sub_total += line_total;	
 
 
-			//document.querySelector("#discount").innerHTML = 
 			//display of sub total
+			//Using innerHTML to displays subtotal and adding a $ to subtotal, also with 2 decimal places from the toFixed(2)
 			document.querySelector("#sub-total").innerHTML = "$" + sub_total.toFixed(2);
 
 			//discount
-			//if the subtotal is 250 or more it will apply 10 percent discount
+			//if the subtotal is greater or equal to 250 it will apply 10 percent discount
+			// the ? is a ternary operator that will return the discount by multiplying subtotal by discount amount if the statement is true regarding amount 250 or more
+			// If less than 250 (false) it will return 0
 			discount = sub_total >= 250 ? sub_total * 0.10 : 0;
+			//Using innerHTML to displays discount amount and adding a $ to it, also with 2 decimal places from the toFixed(2)
 			document.querySelector("#discount").innerHTML = "$" + discount.toFixed(2);
+
 			//tax
+			//Gets tax amount by using bedmas priority of completing calculation
+			//Completes brackets calculation then multiplication operation after
 			tax_amount = (sub_total - discount) * TAX;
+			//Using innerHTML to displays discount amount and adding a $ to it, also with 2 decimal places from the toFixed(2)
 			document.querySelector("#tax").innerHTML = "$" + tax_amount.toFixed(2);
 			
 			//total
+			//After figuring out and displaying the subtotal, discount, and tax, we do the calculation to find grand total
+			//Completes brackets calculation then addition operation after
 			total = (sub_total - discount) + tax_amount;
-			//total+= sub_total
+			//Using innerHTML to display final total and adding a $ to it, also with 2 decimal places from the toFixed(2)
 			document.querySelector("#Total").innerHTML = "$" + total.toFixed(2);
 			
-			calculate_btn = document.querySelector('#calculate');
-			console.log("click");
 			
 			
 	    }
+		// Runs the function above when the calculate button is clicked
 		calc_btn.addEventListener("click", calculate);
 	
     </script>
